@@ -1,0 +1,15 @@
+{
+  "name": "canvas-draw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:carlosrberto/canvas-draw.git",
+  "author": "Carlos Roberto Gomes Junior",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.0"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  }
+}
