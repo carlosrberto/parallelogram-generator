@@ -22,9 +22,10 @@ export const getTrianglePointsOrder = (...points) => {
   let newC;
 
   // sort by Y
-  let [p1, p2, p3] = points.sort((a, b) => a[1] - b[1]);
+  let [p1, p2, p3] = points.sort((a, b) => b[1] - a[1]);
   let rest;
 
+  // find point B
   // two points in the same Y position
   if(p1[1] === p2[1]) {
     // get that with greater X
@@ -40,10 +41,11 @@ export const getTrianglePointsOrder = (...points) => {
     rest = [p2, p3];
   }
 
+  // find point A and C
   // the same X position
   if(rest[0][0] === rest[1][0]) {
-    // get the lower Y
-    if(rest[0][1] < rest[1][1]) {
+    // C will be that with higher Y
+    if(rest[0][1] > rest[1][1]) {
       newC = rest[0];
       newA = rest[1];
     } else {
@@ -51,6 +53,7 @@ export const getTrianglePointsOrder = (...points) => {
       newA = rest[0];
     }
   } else {
+    // A will be that with lower X
     if(rest[0][0] < rest[1][0]) {
       newA = rest[0];
       newC = rest[1];
@@ -89,8 +92,8 @@ export const getParallelogramFromTriangle = (...points) => {
   return [trianglePoints, possiblePoints];
 }
 
-console.log(getTrianglePointsOrder([5,8], [9,6], [14,7]));
-console.log(getParallelogramFromTriangle([5,8], [9,6], [14,7]));
-
-console.log(getTrianglePointsOrder([1,1], [2,2], [1,3]));
-console.log(getParallelogramFromTriangle([1,1], [2,2], [1,3]));
+export const getAllParallelogramCombinations = (a, b, c, d, e, f) => [
+  [a, b, c, e],
+  [a, c, b, d],
+  [b, a, c, f],
+]
