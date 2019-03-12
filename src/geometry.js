@@ -1,8 +1,5 @@
-export const getDistance = (a, b) => {
-  const [ax, ay] = a;
-  const [bx, by] = b;
-  return Math.sqrt(Math.pow(bx - ax, 2) + Math.pow(by - ay, 2));
-}
+export const getDistance = ([ax, ay], [bx, by]) =>
+  Math.sqrt(Math.pow(bx - ax, 2) + Math.pow(by - ay, 2));
 
 export const isTriangle = (a, b, c) => {
   const ab = getDistance(a, b);
@@ -66,11 +63,7 @@ export const getTrianglePointsOrder = (...points) => {
   return [newA, newB, newC];
 }
 
-export const getAllPossibleParallelogramFourthPoint = (a, b, c) => {
-  const [ax, ay] = a;
-  const [bx, by] = b;
-  const [cx, cy] = c;
-
+export const getAllPossibleParallelogramFourthPoint = ([ax, ay], [bx, by], [cx, cy]) => {
   const dx = ax + bx - cx;
   const dy = ay + by - cy;
 
@@ -92,20 +85,11 @@ export const getParallelogramFromTriangle = (...points) => {
   return [trianglePoints, possiblePoints];
 }
 
-export const getMidPoint = (a, b) => {
-  const [ax, ay] = a;
-  const [bx, by] = b;
+export const getMidPoint = ([ax, ay], [bx, by]) =>
+  [(ax + bx) / 2, (ay + by) /2];
 
-  return [(ax + bx) / 2, (ay + by) /2];
-}
-
-export const getParallelogramArea = (a, b, c, d) => {
-  const [ax, ay] = a;
-  const [bx, by] = b;
-  const [cx, cy] = c;
-  const [dx, dy] = d;
-
-  return Math.abs(
+export const getParallelogramArea = ([ax, ay], [bx, by], [cx, cy], [dx, dy]) =>
+  Math.abs(
     (
       (ax * by - ay * bx) +
       (bx * cy - by * cx) +
@@ -113,7 +97,6 @@ export const getParallelogramArea = (a, b, c, d) => {
       (dx * ay - dy * ax)
     ) / 2
   );
-};
 
 export const getAllParallelogramCombinations = (a, b, c, d, e, f) => [
   [a, b, c, e, getMidPoint(b, e), getParallelogramArea(a, b, c, e)],
