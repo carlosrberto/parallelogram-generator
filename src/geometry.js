@@ -92,8 +92,16 @@ export const getParallelogramFromTriangle = (...points) => {
   return [trianglePoints, possiblePoints];
 }
 
+export const getMidPoint = (a, b) => {
+  const [ax, ay] = a;
+  const [bx, by] = b;
+
+  return [(ax + bx) / 2, (ay + by) /2];
+}
+
 export const getAllParallelogramCombinations = (a, b, c, d, e, f) => [
-  [a, b, c, e],
-  [a, c, b, d],
-  [b, a, c, f],
-]
+  [a, b, c, e, getMidPoint(b, e)],
+  [a, c, b, d, getMidPoint(a, b)],
+  [b, a, c, f, getMidPoint(a, f)],
+];
+
