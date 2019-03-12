@@ -1,28 +1,47 @@
-import { createCanvas, circle, parallelogram, renderCanvas } from './canvas';
-import {
-  getParallelogramFromTriangle,
-  getAllParallelogramCombinations,
-  getCircleRadius,
-} from './geometry';
+import { createCanvas, render } from './canvas';
+import { createStore } from './state';
+import { isPointInsideCircle } from './geometry';
+import { getMousePoint } from './mouse';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const { canvas, context } = createCanvas({ width: 900, height: 700 });
-  const drawCircle = circle(context);
-  const drawParallelogram = parallelogram(context);
+const createCanvasStateHandler = (canvas, store) => {
+  let pointIndex;
 
-  const data = [[8, 6], [8, 9], [11,12]].map(v => v.map(i => i*50 - 100));
-  const [trianglePoints, possiblePoints] = getParallelogramFromTriangle(...data);
-
-  trianglePoints.forEach(([x, y]) => drawCircle(x, y, 11));
-
-  const allParallelograms = getAllParallelogramCombinations(...trianglePoints, ...possiblePoints);
-
-  allParallelograms.filter((v, i) => i >= 0).forEach(([a, b, c, d, m, area]) => {
-    const [mx, my] = m;
-    drawCircle(mx, my, 5);
-    drawCircle(mx, my, getCircleRadius(area));
-    drawParallelogram(a, b, c, d);
+  canvas.addEventListener('click', event => {
+    const point = getMousePoint(canvas, event);
+    store.addPoint([...point, 11]);
   });
 
-  renderCanvas(canvas, document.getElementById('root'));
+  canvas.addEventListener('mousedown', event => {
+    const state = store.getState();
+    const [px, py] = getMousePoint(canvas, event);
+    state.points.find(([x, y, r], i) => {
+      if(isPointInsideCircle(px, py, x, y, r)) {
+        pointIndex = i;
+        return true;
+      }
+    });
+  });
+
+  canvas.addEventListener('mousemove', event => {
+    if(pointIndex !== undefined  && pointIndex !== null) {
+      const [px, py] = getMousePoint(canvas, event);
+      store.updatePoint(pointIndex, [px, py, 11]);
+    }
+  });
+
+  canvas.addEventListener('mouseup', event => {
+    pointIndex = null;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const { canvas, context } = createCanvas({ width: 900, height: 700 }, document.getElementById('root'));
+  const renderCanvas = render(canvas, context);
+  const store = createStore();
+  const canvasHandler = createCanvasStateHandler(canvas, store);
+
+  store.subscribe((state) => {
+    // console.log(JSON.stringify(state, null, 2));
+    renderCanvas(state);
+  });
 });
