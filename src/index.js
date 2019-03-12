@@ -2,6 +2,7 @@ import { createCanvas, circle, parallelogram, renderCanvas } from './canvas';
 import {
   getParallelogramFromTriangle,
   getAllParallelogramCombinations,
+  getCircleRadius,
 } from './geometry';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,16 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   {
-    const data = [[8, 6], [8, 9], [11,12]].map(v => v.map(i => i*45));
+    const data = [[8, 6], [8, 9], [11,12]].map(v => v.map(i => i*50));
     const [trianglePoints, possiblePoints] = getParallelogramFromTriangle(...data);
 
     trianglePoints.forEach(([x, y]) => drawCircle(x, y, 11));
 
     const allParallelograms = getAllParallelogramCombinations(...trianglePoints, ...possiblePoints);
 
-    allParallelograms.forEach(([a, b, c, d, m]) => {;
+    allParallelograms.filter((v, i) => i >= 0).forEach(([a, b, c, d, m, area]) => {
       const [mx, my] = m;
       drawCircle(mx, my, 6);
+      drawCircle(mx, my, getCircleRadius(area));
       drawParallelogram(a, b, c, d);
     });
   }

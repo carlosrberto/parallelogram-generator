@@ -99,9 +99,26 @@ export const getMidPoint = (a, b) => {
   return [(ax + bx) / 2, (ay + by) /2];
 }
 
+export const getParallelogramArea = (a, b, c, d) => {
+  const [ax, ay] = a;
+  const [bx, by] = b;
+  const [cx, cy] = c;
+  const [dx, dy] = d;
+
+  return Math.abs(
+    (
+      (ax * by - ay * bx) +
+      (bx * cy - by * cx) +
+      (cx * dy - cy * dx) +
+      (dx * ay - dy * ax)
+    ) / 2
+  );
+};
+
 export const getAllParallelogramCombinations = (a, b, c, d, e, f) => [
-  [a, b, c, e, getMidPoint(b, e)],
-  [a, c, b, d, getMidPoint(a, b)],
-  [b, a, c, f, getMidPoint(a, f)],
+  [a, b, c, e, getMidPoint(b, e), getParallelogramArea(a, b, c, e)],
+  [a, c, b, d, getMidPoint(a, b), getParallelogramArea(a, c, b, d)],
+  [b, a, c, f, getMidPoint(a, f), getParallelogramArea(b, a, c, f)],
 ];
 
+export const getCircleRadius = a => Math.sqrt(a/Math.PI);
