@@ -11,7 +11,7 @@ const OptionsBar = ({ toggleAll, showAllParallelogram }) => (
       id="showAll"
       type="checkbox"
       onChange={toggleAll}
-      value={showAllParallelogram}
+      checked={showAllParallelogram}
     />
     <label
       htmlFor="showAll"

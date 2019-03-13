@@ -37,6 +37,7 @@ const updatePoint = (state, { index, value }) => {
 const reset = state => ({
   ...state,
   points: [],
+  showAllParallelogram: false,
 });
 
 const undo = state => ({

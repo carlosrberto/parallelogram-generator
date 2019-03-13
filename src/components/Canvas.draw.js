@@ -27,6 +27,16 @@ export const parallelogram = context => (a, b, c, d) => {
 
 export const text = context => (x, y, t) => context.fillText(t, x, y);
 
+export const drawSelectedPoints = (context, points) => {
+  const drawCircle = circle(context);
+  const drawText = text(context);
+
+  points.forEach(([x, y, r]) => {
+    drawCircle(x, y, r);
+    drawText(x + 14, y + 2, `(x: ${x}, y: ${y})`);
+  });
+};
+
 export const draw = canvas => (state) => {
   const context = canvas.getContext('2d');
   const drawCircle = circle(context);
@@ -36,20 +46,13 @@ export const draw = canvas => (state) => {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
   if (state.points.length < 3) {
-    state.points.forEach(([x, y, r]) => {
-      drawCircle(x, y, r);
-      drawText(x + 14, y + 2, `(${x}, ${y})`);
-    });
-
+    drawSelectedPoints(context, state.points);
     return;
   }
 
   const [trianglePoints, possiblePoints] = getParallelogramFromTriangle(...state.points);
 
-  trianglePoints.forEach(([x, y, r]) => {
-    drawCircle(x, y, r);
-    drawText(x + 14, y + 2, `(${x}, ${y})`);
-  });
+  drawSelectedPoints(context, trianglePoints);
 
   const allParallelograms = getAllParallelogramCombinations(...trianglePoints, ...possiblePoints);
 
@@ -61,6 +64,7 @@ export const draw = canvas => (state) => {
   }).forEach(([a, b, c, d, m, area]) => {
     const [mx, my] = m;
     drawCircle(mx, my, 3);
+    drawText(mx + 14, my + 2, `Area: ${area}`);
     drawCircle(mx, my, getCircleRadius(area));
     drawParallelogram(a, b, c, d);
   });
