@@ -1,15 +1,78 @@
 {
   "name": "canvas-draw",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
   "repository": "git@github.com:carlosrberto/canvas-draw.git",
-  "author": "Carlos Roberto Gomes Junior",
+  "author": "Carlos Roberto Gomes Junior <carlos.rberto@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "parcel-bundler": "^1.12.0"
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "jest": "^23.6.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-icons": "^3.2.2",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-define": "^1.1.1",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "start": "webpack-dev-server --open --config ./scripts/webpack/webpack.development.js",
+    "build": "npm run clean && webpack --config ./scripts/webpack/webpack.production.js",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest --config jest.config.js",
+    "test:watch": "npm run test -- --watch",
+    "cov": "jest --coverage --config jest.config.js",
+    "cov:publish": "cat ./.coverage/lcov.info | coveralls",
+    "clean": "rimraf dist"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-root-import": "^6.1.0",
+    "css-loader": "^1.0.1",
+    "coveralls": "^3.0.2",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-react": "^7.11.1",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "node-sass": "^4.10.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.4.0",
+    "react-hot-loader": "^4.3.12",
+    "regenerator-runtime": "^0.13.1",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
   }
 }
