@@ -1,6 +1,5 @@
-/* eslint-disable no-restricted-properties */
 export const getDistance = ([ax, ay], [bx, by]) => Math.sqrt(
-  Math.pow(bx - ax, 2) + Math.pow(by - ay, 2),
+  Math.pow(bx - ax, 2) + Math.pow(by - ay, 2), /* eslint-disable-line no-restricted-properties */
 );
 
 export const isTriangle = (a, b, c) => {
