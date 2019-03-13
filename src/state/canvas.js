@@ -34,6 +34,11 @@ const updatePoint = (state, { index, value }) => {
   return state;
 };
 
+const reset = state => ({
+  ...state,
+  points: [],
+});
+
 const undo = state => ({
   ...state,
   point: state.history[state.historyIndex - 1],
@@ -51,17 +56,25 @@ const redo = (state) => {
   return state;
 };
 
+const toggleAll = state => ({
+  ...state,
+  showAllParallelogram: !state.showAllParallelogram,
+});
+
 const counter = create(
   handler('addPoint', addPoint),
   handler('updatePoint', updatePoint),
+  handler('reset', reset),
+  handler('toggleAll', toggleAll),
   handler('undo', undo),
   handler('redo', redo),
 )({
   points: [],
+  showAllParallelogram: false,
   history: [],
   historyIndex: 0,
 }, {
-  typePrefix: 'app/counter',
+  typePrefix: 'app/canvas',
 });
 
 export const reducer = getReducer(counter);

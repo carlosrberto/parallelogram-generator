@@ -1,4 +1,7 @@
-export const getDistance = ([ax, ay], [bx, by]) => Math.sqrt(Math.pow(bx - ax, 2) + Math.pow(by - ay, 2));
+/* eslint-disable no-restricted-properties */
+export const getDistance = ([ax, ay], [bx, by]) => Math.sqrt(
+  Math.pow(bx - ax, 2) + Math.pow(by - ay, 2),
+);
 
 export const isTriangle = (a, b, c) => {
   const ab = getDistance(a, b);
@@ -12,56 +15,7 @@ export const isTriangle = (a, b, c) => {
   );
 };
 
-export const getTrianglePointsOrder = (...points) => {
-  return points;
-  let newA;
-  let newB;
-  let newC;
-
-  // sort by Y
-  const [p1, p2, p3] = points.sort((a, b) => b[1] - a[1]);
-  let rest;
-
-  // find point B
-  // two points in the same Y position
-  if (p1[1] === p2[1]) {
-    // get that with greater X
-    if (p1[0] > p2[0]) {
-      newB = p1;
-      rest = [p2, p3];
-    } else {
-      newB = p2;
-      rest = [p1, p3];
-    }
-  } else {
-    newB = p1;
-    rest = [p2, p3];
-  }
-
-  // find point A and C
-  // the same X position
-  if (rest[0][0] === rest[1][0]) {
-    // C will be that with higher Y
-    if (rest[0][1] > rest[1][1]) {
-      newC = rest[0];
-      newA = rest[1];
-    } else {
-      newC = rest[1];
-      newA = rest[0];
-    }
-  } else {
-    // A will be that with lower X
-    if (rest[0][0] < rest[1][0]) {
-      newA = rest[0];
-      newC = rest[1];
-    } else {
-      newA = rest[1];
-      newC = rest[0];
-    }
-  }
-
-  return [newA, newB, newC];
-};
+export const getTrianglePointsOrder = (...points) => points;
 
 export const getAllPossibleParallelogramFourthPoint = ([ax, ay], [bx, by], [cx, cy]) => {
   const dx = ax + bx - cx;
