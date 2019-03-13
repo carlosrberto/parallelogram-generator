@@ -1,48 +1,4 @@
-const addPoint = (state, point) => {
-  if (state.points.length < 3) {
-    const points = [...state.points, point];
-    const history = [...state.history.slice(0, state.historyIndex + 1), points];
-    const historyIndex = history.length - 1;
-    return {
-      ...state,
-      points,
-      history,
-      historyIndex,
-    };
-  }
-  return state;
-};
 
-const updatePoint = (state, index, value) => {
-  if (state.points.length === 3 && index <= 2) {
-    return {
-      ...state,
-      points: [
-        ...state.points.slice(0, index),
-        value,
-        ...state.points.slice(index + 1, state.points.length),
-      ],
-    };
-  }
-  return state;
-};
-
-const undo = state => ({
-  ...state,
-  point: state.history[state.historyIndex - 1],
-  historyIndex: state.historyIndex - 1,
-});
-
-const redo = (state) => {
-  if (state.historyIndex + 1 <= state.history.length - 1) {
-    return {
-      ...state,
-      point: state.history[state.historyIndex + 1],
-      historyIndex: state.historyIndex + 1,
-    };
-  }
-  return state;
-};
 
 export const createStore = (initialState = {
   points: [],

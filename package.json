@@ -17,7 +17,8 @@
     "redux": "^4.0.1",
     "redux-define": "^1.1.1",
     "redux-devtools-extension": "^2.13.7",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "reduxed": "^0.1.0-alpha.2"
   },
   "scripts": {
     "start": "webpack-dev-server --open --config ./scripts/webpack/webpack.development.js",
@@ -41,8 +42,8 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-root-import": "^6.1.0",
-    "css-loader": "^1.0.1",
     "coveralls": "^3.0.2",
+    "css-loader": "^1.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "eslint": "^4.19.1",
