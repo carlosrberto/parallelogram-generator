@@ -100,7 +100,7 @@ const drawSelectedPoints = (context, points) => {
 
   points.forEach(([x, y, r]) => {
     drawCircle(x, y, r);
-    drawText(x, y, ALIGN.RIGHT, `(x: ${x}, y: ${y})`);
+    drawText(x, y, ALIGN.RIGHT, `(x: ${parseInt(x, 10)}, y: ${parseInt(y, 10)})`);
   });
 };
 
@@ -132,7 +132,7 @@ export const draw = canvas => (state) => {
   }).forEach(([a, b, c, d, m, area]) => {
     const [mx, my] = m;
     drawBlackCircle(mx, my, 2);
-    drawText(mx, my, ALIGN.BOTTOM, `Area: ${area}`);
+    drawText(mx, my, ALIGN.BOTTOM, `Area: ${parseInt(area, 10)}`);
     drawYellowCircle(mx, my, getCircleRadius(area));
     drawParallelogram(a, b, c, d);
   });
