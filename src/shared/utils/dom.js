@@ -8,5 +8,16 @@ export const applyParentSize = (node) => {
 
 export const getMousePoint = (element, event) => {
   const rect = element.getBoundingClientRect();
-  return [event.clientX - rect.left, event.clientY - rect.top];
+  let x;
+  let y;
+
+  if (event.touches) {
+    x = event.touches[0].clientX;
+    y = event.touches[0].clientY;
+  } else {
+    x = event.clientX;
+    y = event.clientY;
+  }
+
+  return [x - rect.left, y - rect.top];
 };
