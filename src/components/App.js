@@ -7,7 +7,7 @@ import ss from './App.sass';
 
 const App = () => (
   <div className={ss.app}>
-    <h1 className={ss.mainTitle}>Parallelogram Finder</h1>
+    <h1 className={ss.mainTitle}>Parallelogram Generator</h1>
     <MenuBar />
     <div className={ss.canvasArea}>
       <Canvas />
