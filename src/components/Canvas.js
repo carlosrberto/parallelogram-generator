@@ -42,7 +42,7 @@ class Canvas extends React.Component {
   onClick(event) {
     if (this.props.points.length < 3) {
       const point = getMousePoint(this.canvas.current, event);
-      this.props.addPoint({ point: [...point, 11] });
+      this.props.addPoint({ point: [...point, 5.5] });
     }
   }
 
@@ -68,7 +68,7 @@ class Canvas extends React.Component {
       const [px, py] = getMousePoint(this.canvas.current, event);
       this.props.updatePoint({
         index: this.pointIndex,
-        value: [px, py, 11],
+        value: [px, py, 5.5],
       });
     }
   }

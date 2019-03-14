@@ -18,6 +18,30 @@ const OptionsBar = ({ toggleAll, showAllParallelogram }) => (
     >
       show all possible parallelograms
     </label>
+
+    {/* <input
+      id="showCoords"
+      type="checkbox"
+      onChange={toggleAll}
+      checked={showAllParallelogram}
+    />
+    <label
+      htmlFor="showCoords"
+    >
+      show points coordinates
+    </label>
+
+    <input
+      id="showArea"
+      type="checkbox"
+      onChange={toggleAll}
+      checked={showAllParallelogram}
+    />
+    <label
+      htmlFor="showArea"
+    >
+      show parallelogram and circle area
+    </label> */}
   </div>
 );
 

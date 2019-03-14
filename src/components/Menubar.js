@@ -7,17 +7,20 @@ import Button from './Button';
 
 import ss from './MenuBar.sass';
 
-const MenuBar = ({ reset }) => (
+const MenuBar = ({ reset, undo, redo }) => (
   <div className={ss.menuBar}>
-    <Button><IoIosUndo /></Button>
-    <Button><IoIosRedo /></Button>
-    <Button onClick={reset}>reset</Button>
+    <Button onClick={undo}><IoIosUndo /></Button>
+    <Button onClick={redo}><IoIosRedo /></Button>
+    {/* <Button onClick={reset}><IoMdDownload /></Button> */}
+    <Button onClick={reset}>clear</Button>
     <Button>about</Button>
   </div>
 );
 
 MenuBar.propTypes = {
   reset: PropTypes.func,
+  undo: PropTypes.func,
+  redo: PropTypes.func,
 };
 
 export default connect(

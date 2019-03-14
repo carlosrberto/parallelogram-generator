@@ -40,18 +40,25 @@ const reset = state => ({
   showAllParallelogram: false,
 });
 
-const undo = state => ({
-  ...state,
-  point: state.history[state.historyIndex - 1],
-  historyIndex: state.historyIndex - 1,
-});
-
-const redo = (state) => {
-  if (state.historyIndex + 1 <= state.history.length - 1) {
+const undo = (state) => {
+  const historyIndex = state.historyIndex - 1;
+  if (historyIndex >= 0) {
     return {
       ...state,
-      point: state.history[state.historyIndex + 1],
-      historyIndex: state.historyIndex + 1,
+      points: state.history[historyIndex],
+      historyIndex,
+    };
+  }
+  return state;
+};
+
+const redo = (state) => {
+  const historyIndex = state.historyIndex + 1;
+  if (historyIndex <= state.history.length - 1) {
+    return {
+      ...state,
+      points: state.history[historyIndex],
+      historyIndex,
     };
   }
   return state;
@@ -72,7 +79,7 @@ const counter = create(
 )({
   points: [],
   showAllParallelogram: false,
-  history: [],
+  history: [[]],
   historyIndex: 0,
 }, {
   typePrefix: 'app/canvas',
