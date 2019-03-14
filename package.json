@@ -21,7 +21,7 @@
     "reduxed": "^0.1.0-alpha.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --config ./scripts/webpack/webpack.development.js",
+    "start": "webpack-dev-server --host 0.0.0.0 --open --config ./scripts/webpack/webpack.development.js",
     "build": "npm run clean && webpack --config ./scripts/webpack/webpack.production.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
