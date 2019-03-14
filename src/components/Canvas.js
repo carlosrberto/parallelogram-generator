@@ -23,12 +23,14 @@ class Canvas extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.onWindowResize);
+    document.addEventListener('mouseup', this.onMouseUp);
     this.drawCanvas = draw(this.canvas.current);
     this.renderCanvas();
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.onWindowResize);
+    document.removeEventListener('mouseup', this.onMouseUp);
   }
 
   componentDidUpdate() {
@@ -74,7 +76,10 @@ class Canvas extends React.Component {
   }
 
   onMouseUp() {
-    this.pointIndex = null;
+    if (this.pointIndex !== null && this.pointIndex !== undefined) {
+      this.pointIndex = null;
+      this.props.updateHistory();
+    }
   }
 
   renderCanvas() {
@@ -100,6 +105,7 @@ class Canvas extends React.Component {
 Canvas.propTypes = {
   addPoint: PropTypes.func,
   updatePoint: PropTypes.func,
+  updateHistory: PropTypes.func,
   points: PropTypes.array,
   showAllParallelogram: PropTypes.bool,
 };

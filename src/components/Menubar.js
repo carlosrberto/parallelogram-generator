@@ -7,12 +7,36 @@ import Button from './Button';
 
 import ss from './MenuBar.sass';
 
-const MenuBar = ({ reset, undo, redo }) => (
+const MenuBar = ({
+  reset,
+  undo,
+  redo,
+  historyIndex,
+  history,
+  points,
+}) => (
   <div className={ss.menuBar}>
-    <Button onClick={undo}><IoIosUndo /></Button>
-    <Button onClick={redo}><IoIosRedo /></Button>
+    <Button
+      title="undo"
+      onClick={undo}
+      disabled={historyIndex === 0}
+    >
+      <IoIosUndo />
+    </Button>
+    <Button
+      title="redo"
+      onClick={redo}
+      disabled={historyIndex === history.length - 1}
+    >
+      <IoIosRedo />
+    </Button>
     {/* <Button onClick={reset}><IoMdDownload /></Button> */}
-    <Button onClick={reset}>clear</Button>
+    <Button
+      onClick={reset}
+      disabled={points.length === 0}
+    >
+      reset
+    </Button>
     <Button>about</Button>
   </div>
 );
@@ -21,9 +45,19 @@ MenuBar.propTypes = {
   reset: PropTypes.func,
   undo: PropTypes.func,
   redo: PropTypes.func,
+  historyIndex: PropTypes.number,
+  history: PropTypes.array,
+  points: PropTypes.array,
 };
 
+const mapStateToProps = state => ({
+  showAllParallelogram: state.canvas.showAllParallelogram,
+  historyIndex: state.canvas.historyIndex,
+  history: state.canvas.history,
+  points: state.canvas.points,
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   actions,
 )(MenuBar);

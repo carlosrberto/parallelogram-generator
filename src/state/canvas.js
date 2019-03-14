@@ -34,11 +34,24 @@ const updatePoint = (state, { index, value }) => {
   return state;
 };
 
-const reset = state => ({
-  ...state,
-  points: [],
-  showAllParallelogram: false,
-});
+const updateHistory = (state) => {
+  const history = [...state.history.slice(0, state.historyIndex + 1), state.points];
+  const historyIndex = history.length - 1;
+  return {
+    ...state,
+    history,
+    historyIndex,
+  };
+};
+
+const reset = (state) => {
+  const nextState = updateHistory({
+    ...state,
+    points: [],
+    showAllParallelogram: false,
+  });
+  return nextState;
+};
 
 const undo = (state) => {
   const historyIndex = state.historyIndex - 1;
@@ -72,6 +85,7 @@ const toggleAll = state => ({
 const counter = create(
   handler('addPoint', addPoint),
   handler('updatePoint', updatePoint),
+  handler('updateHistory', updateHistory),
   handler('reset', reset),
   handler('toggleAll', toggleAll),
   handler('undo', undo),
