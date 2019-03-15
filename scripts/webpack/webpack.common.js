@@ -6,7 +6,7 @@ module.exports = {
   context: path.resolve(__dirname, '..', '..'),
   entry: ['@babel/polyfill', './src/index.js'],
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('build'),
     publicPath: '/',
     filename: 'main.js',
   },
@@ -26,7 +26,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './build',
     historyApiFallback: true,
     hot: true,
   },
