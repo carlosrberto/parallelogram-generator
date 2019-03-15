@@ -19,4 +19,5 @@ Open: http://localhost:8080/
 
 
 ## Note
-This React/Webpack setup is from  my [React Boilerplate](https://github.com/carlosrberto/simple-react-starter-project) project.
+- This React/Webpack setup is from  my [React Boilerplate](https://github.com/carlosrberto/simple-react-starter-project) project.
+- `build` is under version control to use GitHub Pages
