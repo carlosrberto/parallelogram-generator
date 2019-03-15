@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from '~/state/canvas';
 import { IoIosUndo, IoIosRedo } from 'react-icons/io';
 import Button from './Button';
+import Modal from './Modal';
 
 import ss from './MenuBar.sass';
 
@@ -38,6 +39,7 @@ const MenuBar = ({
       reset
     </Button>
     <Button>about</Button>
+    <Modal show />
   </div>
 );
 

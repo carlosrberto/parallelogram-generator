@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/carlosrberto/github-projects.svg?branch=master)](https://travis-ci.org/carlosrberto/github-projects)
-# Canvas Draw
+# Parallelogram Generator
 
-## Notes
-The React/Webpack setup from this project comes from my own React Boilerplate [simple-react-starter-project](https://github.com/carlosrberto/simple-react-starter-project)
+## Note
+This React/Webpack setup is from  my [React Boilerplate](https://github.com/carlosrberto/simple-react-starter-project) project.

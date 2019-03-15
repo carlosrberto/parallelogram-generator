@@ -95,7 +95,10 @@ const pointLabel = context => (x, y, align = ALIGN.RIGHT, text) => {
 };
 
 const drawSelectedPoints = (context, points) => {
-  const drawCircle = circle(context, { strokeStyle: COLORS.RED });
+  const drawCircle = circle(context, {
+    strokeStyle: COLORS.RED,
+    fillStyle: COLORS.RED,
+  });
   const drawText = pointLabel(context);
 
   points.forEach(([x, y, r]) => {
