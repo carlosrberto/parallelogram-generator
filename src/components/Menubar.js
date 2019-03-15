@@ -8,40 +8,66 @@ import Modal from './Modal';
 
 import ss from './MenuBar.sass';
 
-const MenuBar = ({
-  reset,
-  undo,
-  redo,
-  historyIndex,
-  history,
-  points,
-}) => (
-  <div className={ss.menuBar}>
-    <Button
-      title="undo"
-      onClick={undo}
-      disabled={historyIndex === 0}
-    >
-      <IoIosUndo />
-    </Button>
-    <Button
-      title="redo"
-      onClick={redo}
-      disabled={historyIndex === history.length - 1}
-    >
-      <IoIosRedo />
-    </Button>
-    {/* <Button onClick={reset}><IoMdDownload /></Button> */}
-    <Button
-      onClick={reset}
-      disabled={points.length === 0}
-    >
-      reset
-    </Button>
-    <Button>about</Button>
-    <Modal show />
-  </div>
-);
+class MenuBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openModal: false,
+    };
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({
+      openModal: true,
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      openModal: false,
+    });
+  }
+
+  render() {
+    const {
+      reset,
+      undo,
+      redo,
+      historyIndex,
+      history,
+      points,
+    } = this.props;
+
+    return (
+      <div className={ss.menuBar}>
+        <Button
+          title="undo"
+          onClick={undo}
+          disabled={historyIndex === 0}
+        >
+          <IoIosUndo />
+        </Button>
+        <Button
+          title="redo"
+          onClick={redo}
+          disabled={historyIndex === history.length - 1}
+        >
+          <IoIosRedo />
+        </Button>
+        <Button
+          onClick={reset}
+          disabled={points.length === 0}
+        >
+          reset
+        </Button>
+        <Button onClick={this.openModal}>about</Button>
+        <Modal open={this.state.openModal} onClose={this.closeModal} />
+      </div>
+    );
+  }
+}
 
 MenuBar.propTypes = {
   reset: PropTypes.func,

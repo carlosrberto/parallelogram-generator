@@ -9,18 +9,46 @@ import ss from './Modal.sass';
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.el = document.getElementById('modal-root');
+    this.ref = React.createRef();
+    this.modalRootEl = document.getElementById('modal-root');
+    this.onOverlayClick = this.onOverlayClick.bind(this);
+    this.onDocumentKeyUp = this.onDocumentKeyUp.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keyup', this.onDocumentKeyUp);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.onDocumentKeyUp);
+  }
+
+  onDocumentKeyUp(event) {
+    if (event.keyCode === 27 && this.props.open) {
+      this.props.onClose(event);
+    }
+  }
+
+  onOverlayClick(event) {
+    if (event.target === this.ref.current) {
+      this.props.onClose(event);
+    }
   }
 
   render() {
-    const { show } = this.props;
-    return show ? ReactDOM.createPortal(
-      <div className={ss.overlay}>
+    const { open, onClose } = this.props;
+    return open ? ReactDOM.createPortal(
+      <div ref={this.ref} className={ss.overlay} onClick={this.onOverlayClick}>
         <div className={ss.wrapper}>
           <div className={ss.modal}>
             <div className={ss.titleContent}>
               <h2 className={ss.aboutTitle}>About</h2>
-              <button className={ss.closeButton}><IoIosCloseCircleOutline /></button>
+              <button
+                className={ss.closeButton}
+                onClick={onClose}
+              >
+                <IoIosCloseCircleOutline />
+              </button>
             </div>
             <div className={ss.content}>
             {/* eslint-disable max-len */}
@@ -48,7 +76,8 @@ class Modal extends React.Component {
                   <li>You can resize it by dragging the three points around.</li>
                   <li>The points coordinates and the parallelogram area are shown.</li>
                   <li>You can use the <Button>reset</Button> button to clear the drawing area.</li>
-                  <li><Button><IoIosUndo /></Button> and <Button><IoIosRedo /></Button> buttons rollback your changes.</li>
+                  <li>Use <Button><IoIosUndo /></Button> and <Button><IoIosRedo /></Button> buttons to rollback your changes.</li>
+                  <li>Click on option &quot;<strong>show all possible parallelograms</strong>&quot; to see all fourth points.</li>
                 </ol>
               </div>
 
@@ -81,18 +110,18 @@ class Modal extends React.Component {
           </div>
         </div>
       </div>,
-      this.el,
+      this.modalRootEl,
     ) : null;
   }
 }
 
 Modal.defaultProps = {
-  show: false,
+  open: false,
 };
 
 Modal.propTypes = {
   onClose: PropTypes.func,
-  show: PropTypes.bool,
+  open: PropTypes.bool,
 };
 
 export default Modal;
