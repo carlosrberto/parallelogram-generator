@@ -1,6 +1,6 @@
 # Parallelogram Generator
 
-Demo: https://carlosrberto.github.io/parallelogram-generator/
+Demo: https://parallelogram.netlify.com/
 
 ## How to run this app
 
