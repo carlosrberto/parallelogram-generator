@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-
 export const throttle = (fn, limit) => {
   let lastFn;
   let lastRan;

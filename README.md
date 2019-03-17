@@ -2,6 +2,9 @@
 
 Demo: https://parallelogram.netlify.com/
 
+## Requirements
+- Node >= 8
+
 ## How to run this app
 
 Install dependencies:
