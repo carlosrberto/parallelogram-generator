@@ -3,6 +3,7 @@ import {
   handler,
   getActions,
   getReducer,
+  getTypes,
 } from 'reduxed';
 
 const addPoint = (state, { point }) => {
@@ -101,4 +102,4 @@ const counter = create(
 
 export const reducer = getReducer(counter);
 export const actions = getActions(counter);
-export const types = getActions(counter);
+export const types = getTypes(counter);
